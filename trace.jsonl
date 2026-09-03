@@ -1,0 +1,5 @@
+{"ts": 1788412956.191, "stage": "egress_guard", "status": "installed", "allowed": ["127.0.0.1", "::1", "localhost"]}
+{"ts": 1788412956.212, "stage": "sandbox", "ok": true, "exit_code": 0, "limits": {"wall_clock_timeout": true, "cpu_time": true, "max_file_size": true, "address_space": false, "process_count": false, "separate_process": true, "scratch_directory": true, "platform": "Darwin"}, "stderr_head": ""}
+{"ts": 1788412956.227, "stage": "sandbox", "ok": false, "exit_code": 1, "limits": {"wall_clock_timeout": true, "cpu_time": true, "max_file_size": true, "address_space": false, "process_count": false, "separate_process": true, "scratch_directory": true, "platform": "Darwin"}, "stderr_head": "Traceback (most recent call last):\n  File \"/var/folders/52/cpnkhh1d2lg7h4hv7m43jdpm0000gn/T/tmp_kkwvq_1/snippet.py\", line 1, in <module>\n    raise ValueError('boom')\nValueError: boom\n"}
+{"ts": 1788412956.239, "stage": "deliverable", "kind": "docx", "path": "/Users/ethanjoseph/Downloads/sw/outputs/approval_note.docx", "findings": 2}
+{"ts": 1788412956.239, "stage": "egress", "host": "8.8.8.8", "allowed": false}

@@ -1,0 +1,48 @@
+# Model registry. Adding a new model = adding a block here. No code changes.
+# Every backend must speak the OpenAI /v1/chat/completions dialect.
+# This is what lets us swap MLX (Mac) for vLLM (customer's NVIDIA server)
+# by editing config only.
+
+models:
+  - id: general
+    base_url: http://127.0.0.1:8080/v1
+    model_name: qwen3.5-9b
+    good_at: [summary, extraction, drafting, general]
+    context: 32768
+    notes: "Primary reasoning model"
+
+  - id: coder
+    base_url: http://127.0.0.1:8081/v1
+    model_name: qwen3.5-coder-7b
+    good_at: [code, calculation]
+    context: 32768
+    notes: "Code generation and numeric work"
+
+  - id: vision
+    base_url: http://127.0.0.1:8082/v1
+    model_name: qwen3-vl-8b
+    good_at: [vision, ocr_assist, layout]
+    context: 16384
+    notes: "Images, scans, drawings"
+
+embeddings:
+  base_url: http://127.0.0.1:11434
+  model_name: nomic-embed-text
+  dim: 768
+
+routing:
+  default: general
+  rules:
+    - match_any: [write code, python, script, function, debug, run this, calculate, compute, formula]
+      route_to: coder
+    - match_any: [image, scan, drawing, photo, diagram, handwritten]
+      route_to: vision
+
+sandbox:
+  timeout_seconds: 20
+  max_memory_mb: 512
+  cpu_seconds: 20
+
+egress:
+  # Anything not in here is blocked and logged. This is the sovereignty proof.
+  allowed_hosts: ["127.0.0.1", "localhost", "::1"]

@@ -1,0 +1,7 @@
+pyyaml
+httpx
+rank-bm25
+numpy
+python-docx
+openpyxl
+python-pptx
